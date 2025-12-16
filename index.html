@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+<<<<<<< HEAD
+    <meta name="description" content="Optimizing Rank for High-Fidelity Implicit Neural Representations">
+=======
+    <meta name="description" content="Optimizing Implicit Neural Representations with Muon">
+>>>>>>> e2d67833602191c9cf0da0c05c50efd0a3b4d811
+    <meta name="keywords"
+          content="Implicit Neural Representations, Neural Fields, Muon, Muon-INRs, Modality-Agnostic, Representation Learning, Optimization, Adam">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Optimizing Rank for High-Fidelity Implicit Neural Representations</title>
+    <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
+
+    <link rel="stylesheet" href="./static/css/juxtapose.css">
+    <link rel="stylesheet" href="./static/css/bulma.min.css">
+    <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+    <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+    <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+    <link rel="stylesheet" href="./static/css/index.css">
+    <link rel="stylesheet" href="./static/css/mousehover.css">
+    <link rel="icon" href="./static/images/favicon.svg">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script defer src="./static/js/fontawesome.all.min.js"></script>
+    <script src="./static/js/bulma-carousel.min.js"></script>
+    <script src="./static/js/bulma-slider.min.js"></script>
+    <script src="./static/js/index.js"></script>
+    <script src="./static/js/juxtapose.js"></script>
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({ extensions: ["tex2jax.js"], jax: ["input/TeX", "output/HTML-CSS"], tex2jax: { inlineMath: [ ['$','$'], ["\\(","\\)"] ], displayMath: [ ['$$','$$'], ["\\[","\\]"] ], processEscapes: true }, "HTML-CSS": { fonts: ["TeX"] } });
+    </script>
+
+    <script src='https://cdn.plot.ly/plotly-2.14.0.min.js'></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+</head>
+
+<body>
+<nav class="navbar" role="navigation" aria-label="main navigation">
+    <div class="navbar-brand">
+        <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+        </a>
+    </div>
+    <div class="navbar-menu">
+        <div class="navbar-start" style="flex-grow: 1; justify-content: center;">
+            <a class="navbar-item" href="https://jqmcginnis.github.io">
+          <span class="icon">
+            <i class="fas fa-home"></i>
+          </span>
+            </a>
+        </div>
+    </div>
+</nav>
+
+<!-- Hero. -->
+<section class="hero">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column has-text-centered">
+          <h1 class="title is-1 publication-title">Optimizing Rank for High-Fidelity Implicit Neural Representations</h1>
+          <h4 class="title is-4">Preprint</h4>
+          
+          <div class="is-size-5 publication-authors">
+            <span class="author-block">
+              <a href="https://jqmcginnis.github.io">Julian McGinnis</a><sup><small>1,2</small></sup>,
+            </span>
+            <span class="author-block">
+              <a href="#">Florian Hölzl</a><sup><small>3</small></sup>,
+            </span>
+            <span class="author-block">
+              <a href="#">Suprosanna Shit</a><sup><small>4,5</small></sup>,
+            </span>
+            <span class="author-block">
+              <a href="https://dbe.unibas.ch/en/persons/florentin-bieder/">Florentin Bieder</a><sup><small>6</small></sup>,
+            </span>
+            <span class="author-block">
+              <a href="https://pfriedri.github.io">Paul Friedrich</a><sup><small>6</small></sup>,
+            </span>
+            <span class="author-block">
+              <a href="#">Mark Mühlau</a><sup><small>1</small></sup>,
+            </span>
+            <span class="author-block">
+              <a href="#">Björn Menze</a><sup><small>4</small></sup>,
+            </span>
+            <span class="author-block">
+              <a href="https://www.professoren.tum.de/en/rueckert-daniel">Daniel Rueckert</a><sup><small>1,3</small></sup>,
+            </span>
+            <span class="author-block">
+              <a href="#">Benedikt Wiestler</a><sup><small>2,3</small></sup>
+            </span>
+          </div>
+
+          <div class="is-size-5 publication-authors">
+            <span class="author-block"><sup><small>1</small></sup>TUM</span>
+            <span class="author-block"><sup><small>2</small></sup>MCML</span>
+            <span class="author-block"><sup><small>3</small></sup>HPI</span>
+            <span class="author-block"><sup><small>4</small></sup>University of Zurich</span>
+            <br>
+            <span class="author-block"><sup><small>5</small></sup>ETHZ AI Centre</span>
+            <span class="author-block"><sup><small>6</small></sup>University of Basel</span>
+          </div>
+
+          <div class="column has-text-centered">
+            <div class="publication-links">
+            <span class="link-block">
+                <a href="https://arxiv.org/abs/2502.14401" class="external-link button is-normal is-rounded is-dark">
+                <span class="icon"><i class="ai ai-arxiv"></i></span>
+                <span>arXiv</span>
+                </a>
+            </span>
+
+            <span class="link-block">
+                <a href="https://github.com/jqmcginnis/optimizing_rank" class="external-link button is-normal is-rounded is-dark">
+                <span class="icon"><i class="fab fa-github"></i></span>
+                <span>Code (soon)</span>
+                </a>
+            </span>
+
+            <span class="link-block">
+                <a href="INSERT_YOUR_COLAB_URL_HERE" class="external-link button is-normal is-rounded is-dark">
+                <span class="icon"><i class="fab fa-google-drive"></i></span>
+                <span>Colab (soon)</span>
+                </a>
+            </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Eyecatcher. -->
+<section class="eyecatcher">
+    <div class="container is-max-desktop">
+        <div class="hero-body">
+            <div class="has-text-centered">
+                <img src="images/opening_figure.drawio.png" width="100%">
+            </div>
+            <h1 class="ssubtitle has-text-justified is-size-6" style="margin-top: 1rem;">
+                Rank preservation overcomes the low-frequency bias of ReLU MLPs. Vanilla ReLU MLPs lack high-frequency detail (top). Orthogonalized, rank-preserving weight updates enable them to achieve faithful high-frequency reconstructions (middle) by maintaining a stable layer rank throughout optimization (illustrated for hidden layers trained with Adam, which exhibits rank collapse, versus Muon, which preserves stable rank; bottom)
+            </h1>
+        </div>
+    </div>
+</section>
+
+<!-- Abstract. -->
+<section class="section" style="background-color:#f5f5f5">
+    <div class="container is-max-desktop">
+        <div class="columns is-centered has-text-centered">
+            <div class="column is-four-fifths">
+                <h2 class="title is-3">Abstract</h2>
+                <div class="content has-text-justified">
+                    <p>
+                        Implicit Neural Representations (INRs) based on vanilla Multi-Layer Perceptrons (MLPs) are widely believed to be
+                        incapable of representing high-frequency content. This has directed research efforts towards architectural inter-
+                        ventions, such as coordinate embeddings or specialized activation functions. 
+                    </p>
+                    <p>
+                        In this paper, we challenge the notion that the low-frequency bias of vanilla MLPs is an intrinsic, architectural limitation, 
+                        but instead a symptom of <b>stable rank degradation during training</b>. We empirically demonstrate that regulating the network's rank during
+                        training substantially improves the fidelity of the learned signal, rendering even simple MLP architectures expressive.
+                    </p>
+                    <p>
+                        Extensive experiments show that using optimizers like <b>Muon</b>, with high-rank, near-orthogonal updates, con-
+                        sistently enhances INR architectures even beyond simple ReLU MLPs. These substantial improvements hold across
+                        a diverse range of domains, including natural and medical images, and novel view synthesis, with up to <b>9 dB PSNR
+                        improvements</b> over the previous state-of-the-art.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<section class="section">
+    <div class="container is-max-desktop">
+        <div class="columns is-centered has-text-centered">
+            <div class="column is-four-fifths">
+                <h2 class="title is-3">A Stable Rank Perspective on Spectral Bias</h2>
+                <div class="content has-text-justified">
+                    <p>
+                        The phenomenon of spectral bias describes how neural networks prioritize low-frequency functions during training. 
+                        Rather than analyzing this in the function's Fourier spectrum, we examine how it arises from the linear-algebraic structure 
+                        linking activations and weights through gradients. 
+                        Based on the stable rank of layer updates, we clarify how activations shape layer weights, why this reinforces a low-frequency 
+                        bias in INRs, and how different interventions address this bias.
+                    </p>
+                    
+                    <h3 class="title is-5">Stable Rank and Model Expressiveness</h3>
+                    <p>
+                        To quantify the effective dimensionality of this process, we use the stable rank \(s(A)\) as a numerically stable measure 
+                        of diversity for a matrix \(A\) with singular values \(\sigma_{i}\):
+                    </p>
+                    
+                    $$ s(A) = \frac{\|A\|_F^2}{\|A\|_2^2} = \frac{\sum_i \sigma_i^2}{\sigma_{\max}^2} $$
+                    
+                    <p>
+                        A rank-1 matrix has \(s(A)=1\), while a semi-orthogonal matrix with rank \(k\) has \(s(A)=k\).
+                        Applying this inequality to the batched gradient \(\nabla_{W_{l}}\mathcal{L}=G_{l+1}H_{l}^{\top}\) gives:
+                    </p>
+                    
+                    $$ s(\nabla_{W_{l}}\mathcal{L}) \le \text{rank}(H_{l}) $$
+                    
+                    <p>
+                        Thus, for a single layer, it is crucial to understand that the input activations constrain the effective dimensionality of the 
+                        update and consequently its capacity to explore the layer's weight space.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="section" style="background-color:#f5f5f5">
+    <div class="container is-max-desktop">
+        <div class="columns is-centered has-text-centered">
+            <div class="column is-full-width">
+                <h2 class="title is-3">Interventions to Increase Stable Rank</h2>
+                <div class="content has-text-justified">
+                    <p>
+                        Based on this insight, we provide a unifying framework that explains the effectiveness of common architectural modifications 
+                        in INRs. We group these interventions into broad categories of architectural modifications.
+                    </p>
+                </div>
+
+                <div class="columns is-centered">
+                    
+                    <div class="column">
+                        <div class="box" style="height: 100%">
+                            <span class="icon is-large"><i class="fas fa-wave-square fa-2x"></i></span>
+                            <h3 class="title is-5">1. Input-Level Interventions <br> (e.g. Fourier Features)</h3>
+                            <div class="content has-text-left">
+                                <p>
+                                    Methods such as Fourier Features map the low-dimensional input coordinate \(x\) to a high-dimensional vector \(\gamma(x)\) 
+                                    using sampled random frequencies.
+                                </p>
+                                <ul>
+                                    <li><b>Mechanism:</b> This expands the batch matrix \(H_{0}\) to \(H^{\prime}=\gamma(H_{0})\).</li>
+                                    <li><b>Result:</b> This increases the stable rank bound on the first-layer update \(s(\nabla_{W_{1}}\mathcal{L})\le \text{rank}(H_{0}^{\prime})\), enabling learning of higher-frequency components.</li>
+                                    <li><b>Limitation:</b> The trade-off is that frequency bands are static and hand-engineered, potentially not matching the data and/or task.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="column">
+                        <div class="box" style="height: 100%">
+                            <span class="icon is-large"><i class="fas fa-bezier-curve fa-2x"></i></span>
+                            <h3 class="title is-5">2. Activation-Level Interventions <br> (e.g. SIREN, BatchNorm)</h3>
+                            <div class="content has-text-left">
+                                <p>
+                                    A direct approach targets the activations themselves to counter rank diminishing with depth.
+                                </p>
+                                <ul>
+                                    <li><b>Mechanism:</b> Normalization, particularly Batch Normalization (BN), or modifying activation functions (e.g. \(sin(\cdot)\) in SIREN) can promote high-frequency learning.</li>
+                                    <li><b>Result:</b> Effectively increasing \(\text{rank}(H_{l})\).</li>
+                                    <li><b>Limitation:</b> Requires specialized initialization to maintain gradient stability or greater tuning complexity.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="column">
+                        <div class="box" style="height: 100%; border: 2px solid #3273dc;">
+                            <span class="icon is-large has-text-primary"><i class="fas fa-cogs fa-2x"></i></span>
+                            <h3 class="title is-5 has-text-primary">3. Optimizer-Level Intervention <br> (Muon)</h3>
+                            <div class="content has-text-left">
+                                <p>
+                                    We instead view this challenge as an optimization problem, calling for direct intervention at the update level.
+                                </p>
+                                <ul>
+                                    <li><b>Mechanism:</b> We propose to explicitly enforce isotropy in the gradient updates to increase expressiveness. This can be achieved with the general class of orthogonalizing optimizers.</li>
+                                    <li><b>Formula:</b> We map \(U\) to the Frobenius-nearest semi-orthogonal matrix: 
+                                    $$ \text{Ortho}(U)=\arg \min_{O}||O-U||_{F} $$
+                                    </li>
+                                    <li><b>Result:</b> This forces the weight parameter update to be distributed evenly across all of its singular directions.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="section">
+    <div class="container is-max-desktop">
+        
+        <h2 class="title is-3 has-text-centered">High-Resolution Reconstruction</h2>
+
+        <div class="columns is-centered">
+            <div class="column is-full-width">
+                
+                <div class="has-text-centered">
+                    <img src="./images/tigerv2.drawio.png" width="50%" alt="Tiger Reconstruction">
+                </div>
+
+                <div class="content has-text-justified" style="margin-top: 1rem;">
+                    <p>
+                        Reconstructing a tiger from the animal AFHQ dataset using a vanilla ReLU MLP and different rank-preserving/inducing methods. We propose to use Muon, 
+                        which induces a high stable rank via its orthogonalized weight updates.
+                    </p>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<section class="section">
+    <div class="container is-max-desktop">
+        <div class="columns is-centered has-text-centered">
+            <div class="column is-full-width">
+                <h2 class="title is-3">Sparse-View CT Reconstruction</h2>
+                <div class="content has-text-justified">
+                    <p>
+                        We reconstruct a chest CT from only 100 sparse projections. 
+                        Optimization with <b>Muon</b> significantly reduces streak artifacts and recovers fine anatomical structures (such as bronchi) compared to <b>Adam</b>.
+                    </p>
+                </div>
+
+                <div class="columns is-centered">
+                    
+                    <div class="column is-4">
+                        <h4 class="title is-6">ReLU MLP</h4>
+                        <div class="juxtapose" data-startingposition="50%" style="height: 250px; width: 100%;">
+                            <img src="./images/ct/ct_adam_relu_mlp_final_recon.png" data-label="Adam" alt="ReLU MLP Adam"/>
+                            <img src="./images/ct/ct_muon_relu_mlp_final_recon.png" data-label="Muon" alt="ReLU MLP Muon"/>
+                        </div>
+                    </div>
+
+                    <div class="column is-4">
+                        <h4 class="title is-6">ReLU FFN</h4>
+                        <div class="juxtapose" data-startingposition="50%" style="height: 250px; width: 100%;">
+                            <img src="./images/ct/ct_adam_relu_ffn_final_recon.png" data-label="Adam" alt="ReLU FFN Adam"/>
+                            <img src="./images/ct/ct_muon_relu_ffn_final_recon.png" data-label="Muon" alt="ReLU FFN Muon"/>
+                        </div>
+                    </div>
+
+                    <div class="column is-4">
+                        <h4 class="title is-6">Real WIRE</h4>
+                        <div class="juxtapose" data-startingposition="50%" style="height: 250px; width: 100%;">
+                            <img src="./images/ct/ct_adam_real_wire_final_recon.png" data-label="Adam" alt="Real WIRE Adam"/>
+                            <img src="./images/ct/ct_muon_real_wire_final_recon.png" data-label="Muon" alt="Real WIRE Muon"/>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="section">
+    <div class="container is-max-desktop">
+        <div class="columns is-centered has-text-centered">
+            <div class="column is-full-width">
+                <h2 class="title is-3">Single Image Super Resolution (SISR)</h2>
+                <div class="content has-text-justified">
+                    <p>
+                        We compare the reconstruction fidelity of various implicit architectures when optimized with <b>Adam</b> versus <b>Muon</b>.
+                        Drag the slider to observe how rank-preserving optimization recovers high-frequency details (e.g., textures, edges) that are smoothed out by Adam.
+                    </p>
+                </div>
+
+                <div class="columns is-centered is-multiline">
+                    
+                    <div class="column is-4">
+                        <h4 class="title is-6">ReLU MLP</h4>
+                        <div class="juxtapose" data-startingposition="50%" style="height: 250px; width: 100%;">
+                            <img src="./images/sisr/sisr_adam_relu_mlp_final_recon.png" data-label="Adam" alt="ReLU MLP Adam"/>
+                            <img src="./images/sisr/sisr_muon_relu_mlp_final_recon.png" data-label="Muon" alt="ReLU MLP Muon"/>
+                        </div>
+                    </div>
+
+                    <div class="column is-4">
+                        <h4 class="title is-6">ReLU FFN</h4>
+                        <div class="juxtapose" data-startingposition="50%" style="height: 250px; width: 100%;">
+                            <img src="./images/sisr/sisr_adam_relu_ffn_final_recon.png" data-label="Adam" alt="ReLU FFN Adam"/>
+                            <img src="./images/sisr/sisr_muon_relu_ffn_final_recon.png" data-label="Muon" alt="ReLU FFN Muon"/>
+                        </div>
+                    </div>
+
+                    <div class="column is-4">
+                        <h4 class="title is-6">Gaussian MLP</h4>
+                        <div class="juxtapose" data-startingposition="50%" style="height: 250px; width: 100%;">
+                            <img src="./images/sisr/sisr_adam_gauss_mlp_final_recon.png" data-label="Adam" alt="Gaussian MLP Adam"/>
+                            <img src="./images/sisr/sisr_muon_gauss_mlp_final_recon.png" data-label="Muon" alt="Gaussian MLP Muon"/>
+                        </div>
+                    </div>
+
+                    <div class="column is-4">
+                        <h4 class="title is-6">SIREN</h4>
+                        <div class="juxtapose" data-startingposition="50%" style="height: 250px; width: 100%;">
+                            <img src="./images/sisr/sisr_adam_siren_mlp_final_recon.png" data-label="Adam" alt="SIREN Adam"/>
+                            <img src="./images/sisr/sisr_muon_siren_mlp_final_recon.png" data-label="Muon" alt="SIREN Muon"/>
+                        </div>
+                    </div>
+
+                    <div class="column is-4">
+                        <h4 class="title is-6">Finer MLP</h4>
+                        <div class="juxtapose" data-startingposition="50%" style="height: 250px; width: 100%;">
+                            <img src="./images/sisr/sisr_adam_finer_mlp_final_recon.png" data-label="Adam" alt="Finer MLP Adam"/>
+                            <img src="./images/sisr/sisr_muon_finer_mlp_final_recon.png" data-label="Muon" alt="Finer MLP Muon"/>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="section">
+    <div class="container is-max-desktop">
+        
+        <div class="columns is-centered">
+            <div class="column is-8 has-text-centered">
+                
+                <h2 class="title is-3">3D Shape Reconstruction</h2>
+                <div class="content has-text-justified">
+                    <p>
+                        We compare the reconstruction of 3D signed distance fields (SDFs) using a standard <b>ReLU MLP</b>.
+                        <b>Muon</b> captures sharp geometric features that are smoothed by <b>Adam</b>.
+                    </p>
+                </div>
+
+                <div class="columns is-centered">
+                    
+                    <div class="column is-6">
+                        <h4 class="title is-6">Armadillo (ReLU MLP)</h4>
+                        <div class="juxtapose" data-startingposition="50%" style="height: 200px; width: 100%;">
+                            <img src="./images/shapes/adam_relu_armadillo.drawio.png" data-label="Adam" alt="Armadillo Adam"/>
+                            <img src="./images/shapes/muon_relu_armadillo.drawio.png" data-label="Muon" alt="Armadillo Muon"/>
+                        </div>
+                    </div>
+
+                    <div class="column is-6">
+                        <h4 class="title is-6">Statue (ReLU MLP)</h4>
+                        <div class="juxtapose" data-startingposition="50%" style="height: 200px; width: 100%;">
+                            <img src="./images/shapes/adam_relu_statue.drawio.png" data-label="Adam" alt="Statue Adam"/>
+                            <img src="./images/shapes/muon_relu_statue.drawio.png" data-label="Muon" alt="Statue Muon"/>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<section class="section">
+    <div class="container is-max-desktop">
+        <div class="columns is-centered has-text-centered">
+            <div class="column is-full-width">
+                <h2 class="title is-3">Novel View Synthesis (NeRF)</h2>
+                
+                <h3 class="title is-4" style="margin-top: 20px;">Chair</h3>
+                <div class="content has-text-justified">
+                    <p>
+                        Comparisons on the <i>Chair</i> scene.
+                        <b>Muon</b> (right video in each pair) produces sharper, more geometrically consistent renderings with fewer "cloudy" artifacts than <b>Adam</b>.
+                    </p>
+                </div>
+
+                <div class="columns is-centered">
+                    
+                    <div class="column is-6">
+                        <h4 class="title is-6">ReLU MLP</h4>
+                        <div class="columns is-centered is-mobile is-gapless">
+                            <div class="column is-half">
+                                <div class="content is-small">Adam</div>
+                                <video autoplay controls muted loop playsinline width="100%">
+                                    <source src="videos/chair_relu_adam.mp4" type="video/mp4">
+                                </video>
+                            </div>
+                            <div class="column is-half">
+                                <div class="content is-small">Muon</div>
+                                <video autoplay controls muted loop playsinline width="100%">
+                                    <source src="videos/chair_relu_muon.mp4" type="video/mp4">
+                                </video>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="column is-6">
+                        <h4 class="title is-6">FINER</h4>
+                        <div class="columns is-centered is-mobile is-gapless">
+                            <div class="column is-half">
+                                <div class="content is-small">Adam</div>
+                                <video autoplay controls muted loop playsinline width="100%">
+                                    <source src="videos/chair_finer_adam.mp4" type="video/mp4">
+                                </video>
+                            </div>
+                            <div class="column is-half">
+                                <div class="content is-small">Muon</div>
+                                <video autoplay controls muted loop playsinline width="100%">
+                                    <source src="videos/chair_finer_muon.mp4" type="video/mp4">
+                                </video>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <hr> <h3 class="title is-4">Drums</h3>
+                <div class="content has-text-justified">
+                    <p>
+                        Comparisons on the <i>Drums</i> scene.
+                        Similarly, <b>Muon</b> demonstrates superior high-frequency detail reconstruction and geometry compared to <b>Adam</b>.
+                    </p>
+                </div>
+
+                <div class="columns is-centered">
+                    
+                    <div class="column is-6">
+                        <h4 class="title is-6">ReLU MLP</h4>
+                        <div class="columns is-centered is-mobile is-gapless">
+                            <div class="column is-half">
+                                <div class="content is-small">Adam</div>
+                                <video autoplay controls muted loop playsinline width="100%">
+                                    <source src="videos/drums_relu_adam.mp4" type="video/mp4">
+                                </video>
+                            </div>
+                            <div class="column is-half">
+                                <div class="content is-small">Muon</div>
+                                <video autoplay controls muted loop playsinline width="100%">
+                                    <source src="videos/drums_relu_muon.mp4" type="video/mp4">
+                                </video>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="column is-6">
+                        <h4 class="title is-6">FINER</h4>
+                        <div class="columns is-centered is-mobile is-gapless">
+                            <div class="column is-half">
+                                <div class="content is-small">Adam</div>
+                                <video autoplay controls muted loop playsinline width="100%">
+                                    <source src="videos/drums_finer_adam.mp4" type="video/mp4">
+                                </video>
+                            </div>
+                            <div class="column is-half">
+                                <div class="content is-small">Muon</div>
+                                <video autoplay controls muted loop playsinline width="100%">
+                                    <source src="videos/drums_finer_muon.mp4" type="video/mp4">
+                                </video>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!-- BibTeX -->
+<section class="section" id="BibTeX_Sec">
+    <div class="container is-max-desktop content" style="position: relative;">
+        <h2 class="title">BibTeX</h2>
+
+        <div style="position: relative; display: inline-block; width: 100%;">
+            <button onclick="copyBibTeX()" class="button is-small is-primary"
+                    style="position: absolute; top: 10px; right: 10px; z-index: 10;">
+                Copy
+            </button>
+            <pre style="position: relative; padding-right: 5px;">
+      <code id="bibtex">
+@article{mcginnis2025optimizing,
+         title={Optimizing Rank for High-Fidelity Implicit Neural Representations},
+         author={McGinnis, Julian and Hölzl, Florian and Shit, Suprosanna and Bieder, Florentin and Friedrich, Paul and Mühlau, Mark and Menze, Björn and Rueckert, Daniel and Wiestler, Benedikt},
+         journal={arXiv preprint TBD},
+         year={2025}
+        }</code>
+      </pre>
+        </div>
+    </div>
+</section>
+
+<script>
+    function copyBibTeX() {
+        var bibtex = document.getElementById("bibtex").innerText;
+        navigator.clipboard.writeText(bibtex).catch(err => {
+            console.error("Failed to copy: ", err);
+        });
+    }
+</script>
+
+
+<section class="section " id="Acknowledgements ">
+    <div class="container is-max-desktop content ">
+        <h2 class="title ">Acknowledgements</h2>
+        <p>This work is funded by the Munich Center for Machine Learning. Julian McGinnis and Mark Mühlau are supported by Bavarian State Ministry for Science and Art (Collaborative Bilateral Research Program Bavaria – Quebec: AI in medicine, grant F.4-V0134.K5.1/86/34). 
+            Suprosanna Shit is supported by the UZH Postdoc Grant (K-74851-03-01). Suprosanna Shit and Björn Menze acknowledge support by the Helmut Horten Foundation.</p>
+    </div>
+</section>
+
+<footer class="footer ">
+    <div class="container ">
+        <div class="content has-text-centered ">
+            <a class="icon-link " href="https://arxiv.org/abs/2502.14401">
+                <i class="fas fa-file-pdf "></i>
+            </a>
+            <a class="icon-link " href="https://github.com/pfriedri/medfuncta" class="external-link " disabled>
+                <i class="fab fa-github "></i>
+            </a>
+        </div>
+
+        <div class="columns is-centered ">
+            <div class="column is-8 ">
+                <div class="content ">
+                    <p>
+                        This website is licensed under a <a rel="license "
+                                                            href="http://creativecommons.org/licenses/by-sa/4.0/ ">Creative
+                        Commons Attribution-ShareAlike 4.0 International License</a>.
+                    </p>
+                    <p>
+                        This webpage is adapted from the <a
+                            href="https://github.com/nerfies/nerfies.github.io ">Nerfies</a> template.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+</body>
+
+<!-- javascript code for customized juxtapose -->
+<script src="./static/js/juxtapose.js"></script>
+<!-- javascript code for clickable events -->
+<script src="./static/js/clickable.js"></script>
+
+</html>
